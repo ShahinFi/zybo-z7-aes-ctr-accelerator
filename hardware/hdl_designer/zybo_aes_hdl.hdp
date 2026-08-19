@@ -1,0 +1,13 @@
+[ModelSim]
+zybo_aes_hdl_lib = $HDS_PROJECT_DIR\zybo_aes_hdl_lib\work
+[hdl]
+zybo_aes_hdl_lib = $HDS_PROJECT_DIR/zybo_aes_hdl_lib/hdl
+[hds]
+zybo_aes_hdl_lib = $HDS_PROJECT_DIR/zybo_aes_hdl_lib/hds
+[hds_settings]
+default_library = zybo_aes_hdl_lib
+version = 2
+[library_type]
+zybo_aes_hdl_lib = regular
+[shared]
+others = $HDS_TEAM_HOME/shared.hdp

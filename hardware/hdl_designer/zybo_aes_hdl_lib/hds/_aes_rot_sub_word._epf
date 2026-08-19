@@ -1,0 +1,2 @@
+DEFAULT_FILE atom aes_rot_sub_word/struct.bd
+DEFAULT_ARCHITECTURE atom struct
