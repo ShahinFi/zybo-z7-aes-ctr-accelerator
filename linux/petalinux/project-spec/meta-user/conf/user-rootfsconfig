@@ -1,0 +1,8 @@
+#Note: Mention Each package in individual line
+#These packages will get added into rootfs menu entry
+
+CONFIG_gpio-demo
+CONFIG_peekpoke
+CONFIG_zybo-aes-ctr-accel
+CONFIG_zybo-aes-ctr-test
+CONFIG_zybo-aes-ctr-bench
