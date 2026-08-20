@@ -314,6 +314,9 @@ platform project-spec
 AES project-spec overlay
         |
         v
+synchronize maintained Linux sources
+        |
+        v
 PetaLinux configuration and build
 ```
 
@@ -344,6 +347,7 @@ See [BUILD.md](BUILD.md) for the complete workflow to:
 - export the AES XSA
 - create a fresh PetaLinux project
 - apply the platform and AES PetaLinux layers
+- synchronize the maintained Linux sources into the PetaLinux recipes
 - build the Linux image
 - verify the AES packages and device-tree DMA binding
 - package `BOOT.BIN`

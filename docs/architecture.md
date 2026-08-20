@@ -230,7 +230,7 @@ A normal AES-CTR request proceeds as follows:
 
 8. The driver issues the accelerator start operation.
 
-9. AXI DMA MM2S reads the input buffer from DDR.
+9. AXI DMA MM2S reads the TX DMA staging buffer from DDR.
 
 10. The input stream enters the AES-CTR accelerator.
 
@@ -239,7 +239,7 @@ A normal AES-CTR request proceeds as follows:
 
 12. The transformed output stream enters AXI DMA S2MM.
 
-13. AXI DMA writes the result to the output DDR buffer.
+13. AXI DMA S2MM writes the result to the RX DMA staging buffer in DDR.
 
 14. The driver waits for completion or reports a timeout/error.
 
@@ -728,6 +728,9 @@ platform project-spec snapshot
 AES project-spec overlay
         |
         v
+synchronize maintained Linux sources
+        |
+        v
 PetaLinux configuration
         |
         v
@@ -735,6 +738,10 @@ Linux image build
 ```
 
 The platform snapshot provides the common Linux-FPGA base.
+
+Before PetaLinux configuration, the maintained driver and application sources under
+`linux/driver/` and `linux/apps/` are synchronized into the corresponding AES recipe
+`files/` directories.
 
 The AES-specific overlay supplies:
 

@@ -880,6 +880,12 @@ The verified clean-build sequence was:
 9. The final compiled DTB contained the required `tx` and `rx` DMA channel
    binding.
 
+For the current reproduction procedure, perform the source-synchronization step from
+Section 10 between steps 4 and 5 above, before PetaLinux configuration. This copies
+the maintained sources from `linux/driver/` and `linux/apps/` into the corresponding
+recipe `files/` directories and verifies that the recipe build inputs match the
+maintained sources.
+
 The final AES-CTR hardware/software system has also been functionally tested on
 the Zybo Z7-20.
 
