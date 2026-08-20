@@ -25,3 +25,9 @@
 /vivado*.str
 /webtalk*.jou
 /webtalk*.log
+
+# ModelSim/Questa generated files
+/tests/rtl/modelsim/zybo_aes_hdl_lib/
+/tests/rtl/modelsim/modelsim.ini
+/tests/rtl/modelsim/transcript
+/tests/rtl/modelsim/vsim.wlf
