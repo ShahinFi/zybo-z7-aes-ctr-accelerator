@@ -51,10 +51,11 @@ return to application
 ```
 
 The FPGA number therefore represents the performance seen by an application using the accelerator. It is not the isolated execution time of the AES RTL core.
+The measured FPGA time includes the blocking ioctl call, the user-to-driver and driver-to-user buffer copies, DMA setup, and the DMA/accelerator execution.
 
 ### CPU measurement
 
-The CPU time covers the software AES-CTR operation running on the embedded ARM processor.
+The CPU baseline uses the benchmark program's built-in C AES-128 CTR implementation running on the Zybo's ARM processor. It is not an OpenSSL or other externally optimized crypto-library result.
 
 ## Correctness checks
 
@@ -94,8 +95,16 @@ affine
 The final sweep can be reproduced with:
 
 ```bash
-sudo zybo-aes-ctr-bench   --mode compare   --sweep   --key 00112233445566778899aabbccddeeff   --nonce 0102030405060708090a0b0c   --counter 00000001   --pattern affine
+sudo zybo-aes-ctr-bench \
+  --mode compare \
+  --sweep \
+  --key 00112233445566778899aabbccddeeff \
+  --nonce 0102030405060708090a0b0c \
+  --counter 00000001 \
+  --pattern affine
 ```
+
+If `--csv` is not specified, the benchmark writes its local results to `zybo_aes_ctr_bench_results.csv`.
 
 ## Sweep sizes
 
