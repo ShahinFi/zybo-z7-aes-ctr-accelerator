@@ -10,6 +10,7 @@ The suite verifies the behavior of `aes_ctr_block_128` before Vivado and Linux i
 tests/rtl/modelsim/
 ├── README.md
 ├── run_all.do
+├── load_design.do
 ├── common/
 │   └── aes_ctr_test_lib.do
 └── tests/
@@ -18,25 +19,27 @@ tests/rtl/modelsim/
     ├── test_03_input_handshake.do
     ├── test_04_output_backpressure.do
     ├── test_05_partial_blocks.do
-    ├── test_06_start_while_busy.do
-    ├── test_07_counter_management.do
+    ├── test_06_busy_start.do
+    ├── test_07_counter.do
     ├── test_08_reset_during_operation.do
     ├── test_09_multiple_transactions.do
     ├── test_10_continuous_streaming.do
     └── test_11_randomized_stress.do
 ```
 
-`common/aes_ctr_test_lib.do` provides the shared test procedures and checking functions. `run_all.do` executes all tests in order and reports the final result.
+`common/aes_ctr_test_lib.do` provides the shared test procedures and checking functions. `load_design.do` provides standalone VHDL compilation and DUT loading when needed. `run_all.do` is the single regression entry point and reports the final result.
 
 ## Running the regression
 
-Start ModelSim from this directory and run:
+Open ModelSim or Questa and run the regression runner by path:
 
 ```tcl
-do run_all.do
+do /path/to/zybo-z7-aes-ctr-accelerator/tests/rtl/modelsim/run_all.do
 ```
 
-The regression stops with an error if any test fails.
+The runner locates the test files relative to itself. If the AES-CTR DUT is not already loaded, it compiles the repository VHDL sources and loads `aes_ctr_block_128` automatically before running the tests.
+
+The runner continues through all tests and returns an error at the end if any test fails.
 
 ## Test coverage
 

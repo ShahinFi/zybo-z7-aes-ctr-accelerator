@@ -24,33 +24,11 @@
 # Locate and load the common test library
 # =============================================================================
 
-set COMMON_LIBRARY ""
-set SEARCH_DIRECTORY [file normalize [pwd]]
+set TEST_DIRECTORY [file normalize [file dirname [info script]]]
+set COMMON_LIBRARY [file normalize [file join $TEST_DIRECTORY .. common aes_ctr_test_lib.do]]
 
-for {set level 0} {$level < 8} {incr level} {
-    set candidate [file normalize \
-        [file join \
-            $SEARCH_DIRECTORY \
-            sim \
-            common \
-            aes_ctr_test_lib.do]]
-
-    if {[file exists $candidate]} {
-        set COMMON_LIBRARY $candidate
-        break
-    }
-
-    set parent [file dirname $SEARCH_DIRECTORY]
-
-    if {$parent eq $SEARCH_DIRECTORY} {
-        break
-    }
-
-    set SEARCH_DIRECTORY $parent
-}
-
-if {$COMMON_LIBRARY eq ""} {
-    error "Could not locate sim/common/aes_ctr_test_lib.do from [pwd]"
+if {![file exists $COMMON_LIBRARY]} {
+    error "Could not locate the common AES-CTR test library: $COMMON_LIBRARY"
 }
 
 echo "Loading common library: $COMMON_LIBRARY"

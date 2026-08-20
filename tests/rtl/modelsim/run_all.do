@@ -17,7 +17,8 @@
 #   test_11_randomized_stress.do
 #
 # Behavior:
-#   - locates the sim/tests directory automatically
+#   - locates the tests directory relative to this runner
+#   - loads the DUT from repository VHDL when it is not already loaded
 #   - verifies that every required test file exists before starting
 #   - runs every test in numerical order
 #   - catches individual test errors so later tests can still run
@@ -31,46 +32,33 @@
 
 
 # =============================================================================
-# Locate the simulation directory
+# Locate this regression directory
 # =============================================================================
 
-set SIM_DIRECTORY ""
-set SEARCH_DIRECTORY [file normalize [pwd]]
+set SIM_DIRECTORY [file normalize [file dirname [info script]]]
+set TEST_DIRECTORY [file normalize [file join $SIM_DIRECTORY tests]]
 
-for {set level 0} {$level < 8} {incr level} {
-    set candidate [file normalize \
-        [file join \
-            $SEARCH_DIRECTORY \
-            sim]]
-
-    set first_test [file normalize \
-        [file join \
-            $candidate \
-            tests \
-            test_01_reset.do]]
-
-    if {[file exists $first_test]} {
-        set SIM_DIRECTORY $candidate
-        break
-    }
-
-    set parent [file dirname $SEARCH_DIRECTORY]
-
-    if {$parent eq $SEARCH_DIRECTORY} {
-        break
-    }
-
-    set SEARCH_DIRECTORY $parent
+if {![file isdirectory $TEST_DIRECTORY]} {
+    error "Could not locate the regression test directory: $TEST_DIRECTORY"
 }
 
-if {$SIM_DIRECTORY eq ""} {
-    error "Could not locate the sim directory from [pwd]"
+# =============================================================================
+# Ensure the AES-CTR DUT is loaded
+# =============================================================================
+
+set DUT_LOADED 0
+if {![catch {examine sim:/aes_ctr_block_128/aes_ctr_idle}]} {
+    set DUT_LOADED 1
 }
 
-set TEST_DIRECTORY [file normalize \
-    [file join \
-        $SIM_DIRECTORY \
-        tests]]
+if {!$DUT_LOADED} {
+    set loader [file normalize [file join $SIM_DIRECTORY load_design.do]]
+    if {![file exists $loader]} {
+        error "DUT is not loaded and standalone loader is missing: $loader"
+    }
+    echo "AES-CTR DUT is not loaded; compiling repository VHDL sources."
+    do $loader
+}
 
 
 # =============================================================================
