@@ -147,28 +147,7 @@ The programmable-logic design contains:
 
 ### 4.4 DDR-backed transfer memory
 
-Input and output buffers reside in DDR memory.
-
-AXI DMA performs the bulk data movement:
-
-```text
-DDR input
-   |
-   v
-MM2S
-   |
-   v
-AES-CTR
-   |
-   v
-S2MM
-   |
-   v
-DDR output
-```
-
-The processing system retains ownership of the application buffers while DMA
-provides the high-throughput memory-to-stream and stream-to-memory paths.
+For each accelerator request, the driver copies the input data from the user-space buffer into a coherent transmit buffer allocated for DMA. The MM2S DMA channel reads from this buffer and streams the data through the AES-CTR accelerator. The S2MM DMA channel writes the accelerator output into a separate coherent receive buffer. After the DMA transfer completes, the driver copies the receive buffer back to the user-space output buffer.
 
 ---
 
