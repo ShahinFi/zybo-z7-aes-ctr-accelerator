@@ -376,6 +376,43 @@ It also supplies the final image customization used by the verified AES system.
 Common platform configuration and device-tree infrastructure are inherited from
 the pinned platform snapshot rather than duplicated in the AES overlay.
 
+## Synchronize the maintained Linux sources
+
+The maintained driver and application sources are under `linux/driver/` and `linux/apps/`.
+The files under the PetaLinux recipe `files/` directories are synchronized build copies.
+Do not edit them directly. Make source changes only under `linux/driver/` or `linux/apps/`,
+then run the copy commands below to update the recipe copies before configuring and building the PetaLinux image.
+
+```bash
+DRIVER_FILES="$PLNX/project-spec/meta-user/recipes-modules/zybo-aes-ctr-accel/files"
+TEST_FILES="$PLNX/project-spec/meta-user/recipes-apps/zybo-aes-ctr-test/files"
+BENCH_FILES="$PLNX/project-spec/meta-user/recipes-apps/zybo-aes-ctr-bench/files"
+
+cp "$REPO/linux/driver/zybo_aes_ctr_accel.c" "$DRIVER_FILES/zybo_aes_ctr_accel.c"
+cp "$REPO/linux/driver/zybo_aes_ctr_accel_uapi.h" "$DRIVER_FILES/zybo_aes_ctr_accel_uapi.h"
+cp "$REPO/linux/driver/Makefile" "$DRIVER_FILES/Makefile"
+
+cp "$REPO/linux/apps/zybo_aes_ctr_test.c" "$TEST_FILES/zybo_aes_ctr_test.c"
+cp "$REPO/linux/driver/zybo_aes_ctr_accel_uapi.h" "$TEST_FILES/zybo_aes_ctr_accel_uapi.h"
+
+cp "$REPO/linux/apps/zybo_aes_ctr_bench.c" "$BENCH_FILES/zybo_aes_ctr_bench.c"
+cp "$REPO/linux/driver/zybo_aes_ctr_accel_uapi.h" "$BENCH_FILES/zybo_aes_ctr_accel_uapi.h"
+```
+
+Verify that the recipe copies match the maintained sources:
+
+```bash
+cmp "$REPO/linux/driver/zybo_aes_ctr_accel.c" "$DRIVER_FILES/zybo_aes_ctr_accel.c"
+cmp "$REPO/linux/driver/zybo_aes_ctr_accel_uapi.h" "$DRIVER_FILES/zybo_aes_ctr_accel_uapi.h"
+cmp "$REPO/linux/driver/Makefile" "$DRIVER_FILES/Makefile"
+cmp "$REPO/linux/apps/zybo_aes_ctr_test.c" "$TEST_FILES/zybo_aes_ctr_test.c"
+cmp "$REPO/linux/driver/zybo_aes_ctr_accel_uapi.h" "$TEST_FILES/zybo_aes_ctr_accel_uapi.h"
+cmp "$REPO/linux/apps/zybo_aes_ctr_bench.c" "$BENCH_FILES/zybo_aes_ctr_bench.c"
+cmp "$REPO/linux/driver/zybo_aes_ctr_accel_uapi.h" "$BENCH_FILES/zybo_aes_ctr_accel_uapi.h"
+```
+
+The `cmp` commands produce no output when the files match.
+
 ---
 
 # 11. Re-apply the PetaLinux configuration
