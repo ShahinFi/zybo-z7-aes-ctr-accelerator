@@ -5,7 +5,7 @@
 # aes_ctr_block_128 top level. run_all.do calls this only when no DUT is loaded.
 # =============================================================================
 
-set SIM_DIRECTORY [file normalize [file dirname [info script]]]
+set SIM_DIRECTORY [file normalize [pwd]]
 set REPO_ROOT [file normalize [file join $SIM_DIRECTORY .. .. ..]]
 set HDL_DIRECTORY [file normalize [file join $REPO_ROOT hardware hdl_designer zybo_aes_hdl_lib hdl]]
 
@@ -65,6 +65,5 @@ if {[catch {vsim -t 1ps -voptargs=+acc zybo_aes_hdl_lib.aes_ctr_block_128} load_
     error "Could not load aes_ctr_block_128: $load_error"
 }
 
-cd $ORIGINAL_DIRECTORY
 
 echo "Standalone AES-CTR DUT loaded successfully."

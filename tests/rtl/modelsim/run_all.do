@@ -17,7 +17,7 @@
 #   test_11_randomized_stress.do
 #
 # Behavior:
-#   - locates the tests directory relative to this runner
+#   - uses the current ModelSim directory as the regression directory
 #   - loads the DUT from repository VHDL when it is not already loaded
 #   - verifies that every required test file exists before starting
 #   - runs every test in numerical order
@@ -35,11 +35,11 @@
 # Locate this regression directory
 # =============================================================================
 
-set SIM_DIRECTORY [file normalize [file dirname [info script]]]
-set TEST_DIRECTORY [file normalize [file join $SIM_DIRECTORY tests]]
+set SIM_DIRECTORY [file normalize [pwd]]
+set REGRESSION_TEST_DIRECTORY [file normalize [file join $SIM_DIRECTORY tests]]
 
-if {![file isdirectory $TEST_DIRECTORY]} {
-    error "Could not locate the regression test directory: $TEST_DIRECTORY"
+if {![file isdirectory $REGRESSION_TEST_DIRECTORY]} {
+    error "Could not locate the regression test directory: $REGRESSION_TEST_DIRECTORY"
 }
 
 # =============================================================================
@@ -89,7 +89,7 @@ set MISSING_TESTS {}
 foreach test_file $REGRESSION_TESTS {
     set test_path [file normalize \
         [file join \
-            $TEST_DIRECTORY \
+            $REGRESSION_TEST_DIRECTORY \
             $test_file]]
 
     if {![file exists $test_path]} {
@@ -128,7 +128,7 @@ echo "======================================================================"
 echo "AES-CTR COMPLETE RTL REGRESSION"
 echo "======================================================================"
 echo "Simulation directory: $SIM_DIRECTORY"
-echo "Test directory:       $TEST_DIRECTORY"
+echo "Test directory:       $REGRESSION_TEST_DIRECTORY"
 echo "Number of tests:      $TEST_COUNT"
 echo "======================================================================"
 echo ""
@@ -143,7 +143,7 @@ foreach test_file $REGRESSION_TESTS {
 
     set test_path [file normalize \
         [file join \
-            $TEST_DIRECTORY \
+            $REGRESSION_TEST_DIRECTORY \
             $test_file]]
 
     echo ""
@@ -157,7 +157,7 @@ foreach test_file $REGRESSION_TESTS {
     set TEST_START_TIME [clock seconds]
 
     set return_code [catch {
-        do $test_path
+        source $test_path
     } return_message return_options]
 
     set TEST_END_TIME [clock seconds]

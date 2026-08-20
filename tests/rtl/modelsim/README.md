@@ -31,13 +31,14 @@ tests/rtl/modelsim/
 
 ## Running the regression
 
-Open ModelSim or Questa and run the regression runner by path:
+Open ModelSim or Questa, change to the regression directory, and run the regression runner:
 
 ```tcl
-do /path/to/zybo-z7-aes-ctr-accelerator/tests/rtl/modelsim/run_all.do
+cd /path/to/zybo-z7-aes-ctr-accelerator/tests/rtl/modelsim
+do run_all.do
 ```
 
-The runner locates the test files relative to itself. If the AES-CTR DUT is not already loaded, it compiles the repository VHDL sources and loads `aes_ctr_block_128` automatically before running the tests.
+Run the regression from the `tests/rtl/modelsim` directory. The runner uses that directory to locate the test files and standalone design loader. If the AES-CTR DUT is not already loaded, it compiles the repository VHDL sources and loads `aes_ctr_block_128` automatically before running the tests.
 
 The runner continues through all tests and returns an error at the end if any test fails.
 
