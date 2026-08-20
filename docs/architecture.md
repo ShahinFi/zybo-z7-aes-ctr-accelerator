@@ -666,6 +666,9 @@ The current maximum supported request size is:
 
 This is a driver policy consistent with the current DMA configuration.
 
+The current Linux DMA interface requires transfer sizes to be aligned to 4 bytes.
+This is a driver/DMA policy; the RTL itself still supports partial 16-byte AES blocks.
+
 ---
 
 ## 15. User-space applications

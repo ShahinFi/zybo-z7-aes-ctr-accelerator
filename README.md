@@ -361,7 +361,13 @@ See [BUILD.md](BUILD.md) for the complete workflow to:
 The final board-side validation application is:
 
 ```bash
-sudo zybo-aes-ctr-test
+sudo zybo-aes-ctr-test \
+  --key 00112233445566778899aabbccddeeff \
+  --nonce 0102030405060708090a0b0c \
+  --counter 00000001 \
+  --size 4096 \
+  --pattern affine \
+  --count 1
 ```
 
 The final benchmark application is:

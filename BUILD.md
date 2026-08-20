@@ -15,6 +15,7 @@ The rebuild flow covers:
 - fresh PetaLinux project creation from the AES XSA
 - application of the pinned platform PetaLinux base
 - application of the AES-specific PetaLinux overlay
+- synchronization of the maintained Linux sources into the PetaLinux recipes
 - Linux image generation
 - verification of the AES driver, applications, and DMA device-tree binding
 - generation of deployable boot artifacts
@@ -509,7 +510,7 @@ are included in the generated Linux image.
 
 # 14. Verify the DMA device-tree binding
 
-The repository-controlled device-tree overlay associates both AXI DMA channels
+The pinned platform device-tree overlay associates both AXI DMA channels
 with the AES control device:
 
 ```dts
@@ -607,6 +608,10 @@ Identify it carefully:
 ```bash
 lsblk -o NAME,SIZE,FSTYPE,LABEL,MOUNTPOINTS,MODEL,TRAN
 ```
+
+This procedure assumes the SD card is already partitioned with a BOOT FAT32 partition
+and a rootfs ext4 partition as described above. If those partitions do not already
+exist, prepare the card before continuing.
 
 Set the device only after confirming the correct SD card.
 
@@ -824,7 +829,13 @@ This is the device used by the validation and benchmark applications.
 Run:
 
 ```bash
-sudo zybo-aes-ctr-test
+sudo zybo-aes-ctr-test \
+  --key 00112233445566778899aabbccddeeff \
+  --nonce 0102030405060708090a0b0c \
+  --counter 00000001 \
+  --size 4096 \
+  --pattern affine \
+  --count 1
 ```
 
 This application exercises the AES-CTR accelerator through the final Linux
