@@ -1195,10 +1195,6 @@ It is not responsible for:
 - PetaLinux integration,
 - software byte-array representation.
 
-Those responsibilities belong to the surrounding system architecture described in:
-
-```text
-docs/architecture.md
-```
+Those responsibilities belong to the surrounding system architecture described in [System Architecture](architecture.md).
 
 This separation keeps `aes_ctr_block_128` focused on the streaming AES-CTR datapath and its required hardware control.

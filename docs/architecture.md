@@ -30,7 +30,7 @@ This architecture document describes:
 
 Detailed clock-by-clock RTL behavior, internal state sequencing, collector and
 serializer behavior, AES round organization, and RTL-level parallelism are
-documented separately in `docs/rtl-design.md`.
+documented separately in [RTL Design](rtl-design.md).
 
 ---
 
@@ -544,7 +544,7 @@ The detailed implementation of:
 - block-to-block sequencing,
 - internal parallelism,
 
-belongs to `docs/rtl-design.md`.
+is documented in [RTL Design](rtl-design.md).
 
 ---
 
@@ -808,7 +808,7 @@ The final RTL regression result is:
 0 failures
 ```
 
-Detailed RTL verification behavior belongs with the RTL design documentation.
+Detailed RTL verification is documented with the [ModelSim regression suite](../tests/rtl/modelsim/README.md).
 
 ### 17.2 Linux/system validation
 
@@ -889,12 +889,6 @@ The current system:
 The detailed behavior of the AES RTL itself is intentionally separated from
 this system-level document.
 
-See:
-
-```text
-docs/rtl-design.md
-```
-
-for the accelerator microarchitecture, clocked behavior, state sequencing,
+See [RTL Design](rtl-design.md) for the accelerator microarchitecture, clocked behavior, state sequencing,
 collector/serializer operation, AES core organization, counter progression,
 partial-block handling, backpressure behavior, and internal concurrency.

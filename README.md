@@ -42,6 +42,15 @@ CPU AES-CTR throughput  : 3.257 MiB/s
 Speedup                 : approximately 9.85x
 ```
 
+## Documentation
+
+- [System Architecture](docs/architecture.md) — complete Linux-FPGA system structure, control path, data path, driver responsibilities, and PetaLinux integration.
+- [RTL Design](docs/rtl-design.md) — detailed AES-CTR RTL datapath, stream handling, AES core, counter behavior, control sequencing, and parallelism.
+- [RTL Verification](tests/rtl/modelsim/README.md) — ModelSim regression structure, test coverage, instructions, and final verification result.
+- [Board Validation](results/board-validation.md) — functional validation of the complete system on the physical Zybo Z7-20.
+- [Benchmark Results](results/benchmark-results.md) — FPGA-versus-CPU benchmark method and complete measured results.
+- [Build and Reproduction Guide](BUILD.md) — complete hardware and Linux rebuild, deployment, validation, and benchmark procedure.
+
 ## Relationship to the base platform
 
 The `platform/` submodule is the reusable Linux-FPGA foundation for this
@@ -223,6 +232,8 @@ The final regression result is:
 0 failures
 ```
 
+See [RTL Verification](tests/rtl/modelsim/README.md) for the regression structure, per-test coverage, final results, and run instructions.
+
 ## Target platform
 
 - Board: Digilent Zybo Z7-20
@@ -257,9 +268,27 @@ linux/
   petalinux/
     AES-specific PetaLinux overlay
 
+docs/
+  architecture.md
+    complete Linux-FPGA system architecture
+
+  rtl-design.md
+    detailed AES-CTR RTL design
+
 tests/
   rtl/
-    ModelSim AES-CTR regression suite
+    modelsim/
+      ModelSim AES-CTR regression suite
+
+results/
+  README.md
+    result documentation index
+
+  board-validation.md
+    physical-board functional validation
+
+  benchmark-results.md
+    FPGA-versus-CPU benchmark results
 
 BUILD.md
   complete AES hardware/software rebuild and deployment procedure
@@ -347,6 +376,8 @@ FPGA : 32.087 MiB/s
 CPU  : 3.257 MiB/s
       ~9.85x speedup
 ```
+
+See [Board Validation](results/board-validation.md) for the final physical-board functional checks and [Benchmark Results](results/benchmark-results.md) for the complete performance sweep and measurement method.
 
 ## Project status
 
