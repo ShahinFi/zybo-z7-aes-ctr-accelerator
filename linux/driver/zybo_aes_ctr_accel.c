@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-2.0
+// SPDX-License-Identifier: GPL-2.0 OR MIT
 /*
  * Zybo Z7 AES-CTR FPGA accelerator platform driver.
  *
@@ -658,4 +658,4 @@ module_platform_driver(zybo_aes_ctr_driver);
 
 MODULE_AUTHOR("Shahin");
 MODULE_DESCRIPTION("Zybo Z7 AES-CTR FPGA accelerator platform driver");
-MODULE_LICENSE("GPL");
+MODULE_LICENSE("Dual MIT/GPL");
