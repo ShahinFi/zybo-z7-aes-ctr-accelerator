@@ -14,3 +14,14 @@
 /linux/driver/Module.symvers
 /linux/driver/modules.order
 /linux/driver/.tmp_versions/
+
+# Local benchmark output
+/zybo_aes_ctr_bench_results.csv
+
+# Vivado transient files
+/.Xil/
+/vivado*.jou
+/vivado*.log
+/vivado*.str
+/webtalk*.jou
+/webtalk*.log
