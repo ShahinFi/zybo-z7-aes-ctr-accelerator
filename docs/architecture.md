@@ -165,8 +165,8 @@ flowchart TB
     end
 
     subgraph MEMORY["DDR memory"]
-        DDR_IN["Input buffer"]
-        DDR_OUT["Output buffer"]
+        DDR_IN["TX DMA staging buffer"]
+        DDR_OUT["RX DMA staging buffer"]
     end
 
     subgraph PL["Programmable logic"]
@@ -181,8 +181,8 @@ flowchart TB
 
     DRIVER -->|"program key / nonce / counter / start"| CTRL
 
-    DRIVER -->|"prepare input"| DDR_IN
-    DRIVER -->|"prepare output"| DDR_OUT
+    DRIVER -->|"copy input into TX staging buffer"| DDR_IN
+    DRIVER -->|"configure RX staging buffer for DMA"| DDR_OUT
 
     DDR_IN -->|"DMA read"| MM2S
     MM2S -->|"32-bit AXI-Stream"| AES
