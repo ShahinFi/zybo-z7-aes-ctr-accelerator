@@ -62,6 +62,8 @@ Correctness checks were performed before and after the repeated timing loop for 
 
 These checks were not included in the reported timing values.
 
+Average latency is calculated from the individual timed operations. Throughput is calculated from the total processed payload divided by the elapsed time of the complete timed loop.
+
 The FPGA result was also rejected if the driver reported a failed request, timeout, or error.
 
 The complete final sweep finished with:
@@ -89,7 +91,7 @@ Input pattern:
 affine
 ```
 
-The final command was:
+The final sweep can be reproduced with:
 
 ```bash
 sudo zybo-aes-ctr-bench   --mode compare   --sweep   --key 00112233445566778899aabbccddeeff   --nonce 0102030405060708090a0b0c   --counter 00000001   --pattern affine

@@ -1133,7 +1133,7 @@ Within the AES core, the 128-bit state uses the project AES byte convention in w
 
 That byte convention is used consistently by the SubBytes, ShiftRows, MixColumns, key-expansion, Rcon, and RotWord/SubWord logic described above.
 
-System- and regression-level evidence for correctness belongs in the project results documentation rather than in this RTL design description.
+RTL regression evidence is documented with the [ModelSim regression suite](../tests/rtl/modelsim/README.md), while system-level validation and performance results are kept under [results/](../results/README.md).
 
 ---
 

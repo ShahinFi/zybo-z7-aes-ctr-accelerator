@@ -775,7 +775,7 @@ The final AES image uses:
 /dev/zybo_aes_ctr0
 ```
 
-is not the AES accelerator interface.
+This is the device used by the validation and benchmark applications.
 
 ---
 

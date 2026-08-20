@@ -1,0 +1,16 @@
+# Generated hardware build outputs
+/build/
+
+# Local user-space application binaries
+/linux/apps/zybo-aes-ctr-test
+/linux/apps/zybo-aes-ctr-bench
+
+# Local kernel-module build outputs
+/linux/driver/*.o
+/linux/driver/*.ko
+/linux/driver/*.mod
+/linux/driver/*.mod.c
+/linux/driver/.*.cmd
+/linux/driver/Module.symvers
+/linux/driver/modules.order
+/linux/driver/.tmp_versions/
