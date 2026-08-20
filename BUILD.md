@@ -31,6 +31,7 @@ The rebuild flow covers:
 ## Tool versions
 
 - Vivado 2025.2 on Windows
+- ModelSim DE-64 2022.3 on Windows
 - PetaLinux 2025.2 on Ubuntu 22.04.5 LTS
 
 ## Development split
@@ -143,6 +144,8 @@ The regression entry point is:
 ```text
 tests/rtl/modelsim/run_all.do
 ```
+
+For the standalone ModelSim/Questa procedure, see [`tests/rtl/modelsim/README.md`](tests/rtl/modelsim/README.md).
 
 The final suite contains 11 tests covering:
 
